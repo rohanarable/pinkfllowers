@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#49304e">
+  <meta name="description" content="A little pink garden to grow, tend, and make wishes in.">
+  <title>A Little Garden, Just for You</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="scene" id="scene">
+    <canvas id="garden" tabindex="0" aria-label="Interactive pink flowering garden. Focus this garden, use arrow keys to move, then press Enter or Space to use the selected tool. Shortcuts: P plant, W wind, R water, K pick, S wish, N night, B bouquet, C clear.">
+      Your browser does not support canvas. The garden needs a canvas to grow.
+    </canvas>
+
+    <header class="topbar">
+      <p class="wordmark">a little garden <span aria-hidden="true">&#9825;</span></p>
+      <div class="top-actions">
+        <button id="dayNight" class="icon-button icon-only-button" type="button" aria-label="Switch to moonlight" aria-pressed="false" title="Day / night (N)">
+          <svg class="control-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15.5 3.3a8.7 8.7 0 1 0 5.2 15.8A9 9 0 0 1 15.5 3.3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="music" class="icon-button music-button" type="button" aria-label="Music: Off &#9834;" aria-pressed="false" title="Music: Off &#9834;"><span class="music-label">Music: Off</span><svg class="control-icon music-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 18.2V6.7l10-2.2v10.8M9 18.2c0 1.3-1.4 2.3-3.1 2.3S3 19.5 3 18.2s1.4-2.3 3.1-2.3 2.9 1 2.9 2.3Zm10-3c0 1.3-1.4 2.3-3.1 2.3s-2.9-1-2.9-2.3-1.4-2.3-2.9-2.3-3.1 1-3.1 2.3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </header>
+
+    <section id="intro" class="intro" aria-labelledby="opening">
+      <p id="for" class="for-line"></p>
+      <h1 id="opening">I made something little for you... &#9825;</h1>
+      <button id="grow" class="primary-button" type="button">Grow Our Little Garden &#127793;</button>
+      <p class="intro-hint">A small place to play, pick, and make a wish.</p>
+    </section>
+
+    <section id="note" class="love-note" aria-live="polite" hidden>
+      <p id="main" class="main-message"></p>
+      <p id="sub" class="sub-message"></p>
+      <p id="sig" class="signature"></p>
+      <div class="note-actions">
+        <button id="more" class="text-button" type="button" aria-label="Open hidden message" title="Open hidden message"><svg class="text-button-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20.5S4 16 4 9.8A4.2 4.2 0 0 1 12 7a4.2 4.2 0 0 1 8 2.8c0 6.2-8 10.7-8 10.7Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span class="button-label">A Little More Love</span></button>
+        <button id="replay" class="text-button" type="button" aria-label="Replay the magic" title="Replay the magic"><svg class="text-button-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 10a8 8 0 1 1 2.3 5.7M4 10V4m0 6h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="button-label">Replay the Magic</span></button>
+      </div>
+    </section>
+
+    <nav class="toolbar" aria-label="Garden tools">
+      <button class="tool-button selected" type="button" data-tool="plant" aria-label="Plant tool, selected. Tap the garden to plant." aria-pressed="true" title="Plant (P)"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v16M4 12h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><small>Plant</small></button>
+      <button class="tool-button" type="button" data-tool="wind" aria-label="Wind tool. Drag to sway the garden." aria-pressed="false" title="Wind (W)"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 8h12.5c2.1 0 2.1-3 0-3-1 0-1.6.5-2 1.1M3 12h17c2.1 0 2.1 3 0 3-1 0-1.6-.5-2-1.1M3 16h9.5c2.1 0 2.1 3 0 3-.9 0-1.5-.4-1.9-1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><small>Wind</small></button>
+      <button class="tool-button" type="button" data-tool="water" aria-label="Water tool. Hold or drag to shower the garden." aria-pressed="false" title="Water (R)"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3s6 6.2 6 11a6 6 0 0 1-12 0c0-4.8 6-11 6-11Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><small>Water</small></button>
+      <button class="tool-button" type="button" data-tool="pick" aria-label="Pick petals tool. Tap a flower to gather petals." aria-pressed="false" title="Pick petals (K)"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3ZM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><small>Pick</small></button>
+      <button class="tool-button" type="button" data-tool="wish" aria-label="Wish tool. Tap to make a wish." aria-pressed="false" title="Sparkle / wish (S)"><svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20.5S4 16 4 9.8A4.2 4.2 0 0 1 12 7a4.2 4.2 0 0 1 8 2.8c0 6.2-8 10.7-8 10.7Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><small>Wish</small></button>
+    </nav>
+
+    <div class="utility-actions" aria-label="Garden actions">
+      <button id="bouquet" class="utility-button" type="button" aria-label="Make a bouquet card">Bouquet</button>
+      <button id="save" class="utility-button" type="button" aria-label="Save garden picture as PNG">Save picture</button>
+      <button id="clear" class="utility-button" type="button" aria-label="Clear all plants from the garden">Clear</button>
+    </div>
+    <p id="hint" class="hint" aria-live="polite">Choose a tool &middot; P plant &middot; W wind &middot; R water &middot; K pick &middot; S wish &middot; N night</p>
+    <p id="status" class="sr-only" aria-live="polite"></p>
+  </main>
+
+  <dialog id="messageDialog" class="message-dialog" aria-labelledby="hiddenMessage">
+    <svg class="message-heart" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20.5S4 16 4 9.8A4.2 4.2 0 0 1 12 7a4.2 4.2 0 0 1 8 2.8c0 6.2-8 10.7-8 10.7Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    <p id="hiddenMessage"></p>
+    <button class="dialog-close" type="button">Close</button>
+  </dialog>
+
+  <dialog id="bouquetDialog" class="bouquet-dialog" aria-labelledby="bouquetTitle">
+    <div class="bouquet-art" aria-hidden="true">
+      <span class="bouquet-stem"></span><span class="bouquet-stem"></span><span class="bouquet-stem"></span>
+      <span class="vase"></span>
+    </div>
+    <h2 id="bouquetTitle">A little bouquet for you</h2>
+    <p id="bouquetText">A few garden blooms, gathered with love. &#9825;</p>
+    <button class="dialog-close" type="button">Close</button>
+  </dialog>
+
+  <noscript><p class="noscript">This little garden needs JavaScript to grow. &#9825;</p></noscript>
+  <script src="script.js"></script>
+</body>
+</html>
+
+
